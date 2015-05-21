@@ -5,7 +5,23 @@
         <!-- We've provided some styles for you, aren't we nice? -->
         <link rel="stylesheet" type="text/css" href="reset.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
+        <script type="text/javascript" src="angular.js"></script>
+        <script type="text/javascript" src="app.js"></script>
     </head>
-    <body>
+    <body ng-app="Flashcards" ng-controller="MainController">
+    	<div class="flash-card" ng-controller="FlashCardController" ng-repeat="card in flashCards | orderBy:'question'">
+		    <h1>{{card.question | uppercase}}</h1>
+		    <ul class="flash-card-answers">
+		        <li class="flash-card-answer" ng-repeat="answer in card.answers" ng-click="answerQuestion(answer)">
+		            {{answer.text}}
+		        </li>
+		        
+		    </ul>
+		    <h2 class="answer-feedback" ng-show="answered" ng-class="{correct: answeredCorrectly, incorrect: !answeredCorrectly}">
+				    <span ng-show="answeredCorrectly">Yeah, you got it right!</span>
+				    <span ng-show="!answeredCorrectly">Nope, you got it wrong.</span>
+				</h2>
+		</div>
+
     </body>
 </html>
